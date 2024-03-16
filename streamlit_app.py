@@ -110,12 +110,10 @@ def record_page():
                 return response.json()
 
             data_emotion = query_emotion(bytes_data)
-            print(data_emotion)
-            print(type(data_emotion))
-            values_view_emotion = data_emotion.values()
-            value_iterator_emotion = iter(values_view_emotion)
-            text_value_emotion = next(value_iterator_emotion)
-            text_value_emotion = text_value_emotion['label']
+            values_view_emotion = data_emotion[0]
+            # value_iterator_emotion = iter(values_view_emotion)
+            # text_value_emotion = next(value_iterator_emotion)
+            text_value_emotion = values_view_emotion['label']
 
             st.success(text_value_emotion)
 
