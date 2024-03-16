@@ -113,7 +113,7 @@ def record_page():
 
             data_emotion = query_emotion(bytes_data)
             print(data_emotion)
-            values_view_emotion = data_emotion
+            values_view_emotion = data_emotion.values()
             value_iterator_emotion = iter(values_view_emotion)
             text_value_emotion = next(value_iterator_emotion)
             text_value_emotion = text_value_emotion.lower()
