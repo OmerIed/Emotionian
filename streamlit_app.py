@@ -106,14 +106,13 @@ def record_page():
 
             API_URL_EMOTION = "https://api-inference.huggingface.co/models/CAiRE/SER-wav2vec2-large-xlsr-53-eng-zho-adults"
 
-            def query_emotion(filename):
-                with open(filename, "rb") as f:
-                    data_emotion = f.read()
-                response = requests.post(API_URL_EMOTION, headers=headers, data=data_emotion)
+            def query_emotion(bytes_data):
+                response = requests.post(API_URL_EMOTION, headers=headers, data=bytes_data)
                 return response.json()
 
-            data_emotion = query_emotion(audio_file.name)
-            # print(data_emotion)
+            data_emotion = query_emotion(bytes_data)
+            print(data_emotion)
+            print(type(data_emotion))
             # values_view_emotion = data_emotion.values()
             # value_iterator_emotion = iter(values_view_emotion)
             # text_value_emotion = next(value_iterator_emotion)
