@@ -112,7 +112,7 @@ def record_page():
                 response = requests.post(API_URL_EMOTION, headers=headers, data=data_emotion)
                 return response.json()
 
-            data_emotion = query_emotion(audio_file)
+            data_emotion = query_emotion(audio_file.name)
             # print(data_emotion)
             # values_view_emotion = data_emotion.values()
             # value_iterator_emotion = iter(values_view_emotion)
