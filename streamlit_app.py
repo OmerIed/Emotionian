@@ -104,6 +104,21 @@ def record_page():
 
             st.success(text_value)
 
+            API_URL_EMOTION = "https://api-inference.huggingface.co/models/CAiRE/SER-wav2vec2-large-xlsr-53-eng-zho-adults"
+
+
+            def query_emotion(data):
+                response = requests.request("POST", API_URL_EMOTION, headers=headers, data=data)
+                return json.loads(response.content.decode("utf-8"))
+
+            data_emotion = query_emotion(bytes_data)
+            values_view_emotion = data_emotion.values()
+            value_iterator_emotion = iter(values_view_emotion)
+            text_value_emotion = next(value_iterator_emotion)
+            text_value_emotion = text_value_emotion.lower()
+
+            st.success(text_value_emotion)
+
             c0, c1 = st.columns([2, 2])
 
             with c0:
@@ -169,10 +184,11 @@ def main():
 
     pages[page]()
 
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    st.title('Emotionian')
-    st.write('Sabag has Brachydactyly type E (https://rarediseases.info.nih.gov/diseases/987/brachydactyly-type-e)')
+    # st.title('Emotionian')
+    # st.write('Sabag has Brachydactyly type E (https://rarediseases.info.nih.gov/diseases/987/brachydactyly-type-e)')
     # audio_file = st.sidebar.file_uploader(label="",
     #                                       type=[".wav", ".wave", ".flac", ".mp3", ".ogg"])
     # st.audio(audio_file, format="audio/wav", start_time=0)
