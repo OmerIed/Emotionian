@@ -112,7 +112,8 @@ def record_page():
                 return json.loads(response.content.decode("utf-8"))
 
             data_emotion = query_emotion(bytes_data)
-            values_view_emotion = data_emotion.values()
+            print(data_emotion)
+            values_view_emotion = data_emotion
             value_iterator_emotion = iter(values_view_emotion)
             text_value_emotion = next(value_iterator_emotion)
             text_value_emotion = text_value_emotion.lower()
