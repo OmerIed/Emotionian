@@ -104,7 +104,7 @@ def record_page():
 
             st.success(text_value)
 
-            API_URL_EMOTION = "https://api-inference.huggingface.co/models/CAiRE/SER-wav2vec2-large-xlsr-53-eng-zho-adults"
+            API_URL_EMOTION = "https://api-inference.huggingface.co/models/Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8"
 
             def query_emotion(bytes_data):
                 response = requests.post(API_URL_EMOTION, headers=headers, data=bytes_data)
