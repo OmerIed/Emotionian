@@ -85,7 +85,6 @@ def record_page():
             bytes_data = audio_file.getvalue()
 
             # Load your API key from an environment variable or secret management service
-            # TODO: generate api_token and insert it to st secrets
             api_token = st.secrets["api_token"]
 
             # endregion API key
@@ -113,12 +112,12 @@ def record_page():
             data_emotion = query_emotion(bytes_data)
             print(data_emotion)
             print(type(data_emotion))
-            # values_view_emotion = data_emotion.values()
-            # value_iterator_emotion = iter(values_view_emotion)
-            # text_value_emotion = next(value_iterator_emotion)
-            # text_value_emotion = text_value_emotion.lower()
+            values_view_emotion = data_emotion.values()
+            value_iterator_emotion = iter(values_view_emotion)
+            text_value_emotion = next(value_iterator_emotion)
+            text_value_emotion = text_value_emotion['label']
 
-            st.success(data_emotion)
+            st.success(text_value_emotion)
 
             c0, c1 = st.columns([2, 2])
 
