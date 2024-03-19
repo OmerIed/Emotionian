@@ -5,7 +5,7 @@ import streamlit as st
 import os
 import random
 import csv
-import datetime
+from datetime import datetime
 
 
 def _max_width_():
