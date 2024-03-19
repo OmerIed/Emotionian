@@ -28,8 +28,8 @@ _max_width_()
 # Define the path to the CSV file
 CSV_PATH = 'emotionian_dataset.csv'
 
-def insert_string_every_n_chars(s, n=50, insert_str="\n"):
-    return insert_str.join(s[i:i+n] for i in range(0, len(s), n))
+# def insert_string_every_n_chars(s, n=50, insert_str="\n"):
+#     return insert_str.join(s[i:i+n] for i in range(0, len(s), n))
 
 def update_csv(csv_path, transcription, emotion_analysis):
     # Convert the JSON data to a Python dictionary for easier access to emotion scores
@@ -41,7 +41,7 @@ def update_csv(csv_path, transcription, emotion_analysis):
     # Define the CSV column names
     columns = ['Date', 'Transcription', 'happy_score', 'sad_score', 'calm_score', 'angry_score', 'neutral_score',
                'disgust_score', 'fearful_score', 'surprised_score']
-    transcription_w_lnbreaks = insert_string_every_n_chars(transcription)
+    # transcription_w_lnbreaks = insert_string_every_n_chars(transcription)
     # Open the CSV file in append mode ('a') so we add a new row without overwriting existing data
     with open(csv_path, 'a', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=columns)
@@ -49,7 +49,7 @@ def update_csv(csv_path, transcription, emotion_analysis):
         # Prepare the row to be written to the CSV file
         row = {
             'Date': current_date,
-            'Transcription': transcription_w_lnbreaks,
+            'Transcription': transcription,
             'happy_score': emotion_scores.get('happy', 0),
             'sad_score': emotion_scores.get('sad', 0),
             'calm_score': emotion_scores.get('calm', 0),
