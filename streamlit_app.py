@@ -4,6 +4,9 @@ import requests
 import streamlit as st
 import os
 import random
+import csv
+import datetime
+
 
 def _max_width_():
     max_width_str = f"max-width: 1200px;"
@@ -22,14 +25,39 @@ def _max_width_():
 _max_width_()
 
 
-df = pd.DataFrame(
-    {
-        "name": ["Roadmap", "Extras", "Issues"],
-        "url": ["https://roadmap.streamlit.app", "https://extras.streamlit.app", "https://issues.streamlit.app"],
-        "stars": [random.randint(0, 1000) for _ in range(3)],
-        "views_history": [[random.randint(0, 5000) for _ in range(30)] for _ in range(3)],
-    }
-)
+# Define the path to the CSV file
+CSV_PATH = 'emotionian_dataset.csv'
+
+
+def update_csv(csv_path, transcription, emotion_analysis):
+    # Convert the JSON data to a Python dictionary for easier access to emotion scores
+    emotion_scores = {emotion['label']: emotion['score'] for emotion in emotion_analysis}
+
+    # Get the current date in the desired format
+    current_date = datetime.now().strftime("%Y-%m-%d")
+
+    # Define the CSV column names
+    columns = ['Date', 'Transcription', 'happy_score', 'sad_score', 'calm_score', 'angry_score', 'neutral_score']
+
+    # Open the CSV file in append mode ('a') so we add a new row without overwriting existing data
+    with open(csv_path, 'a', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=columns)
+
+        # Prepare the row to be written to the CSV file
+        row = {
+            'Date': current_date,
+            'Transcription': transcription,
+            'happy_score': emotion_scores.get('happy', 0),
+            'sad_score': emotion_scores.get('sad', 0),
+            'calm_score': emotion_scores.get('calm', 0),
+            'angry_score': emotion_scores.get('angry', 0),
+            'neutral_score': emotion_scores.get('neutral', 0),
+        }
+
+        # Write the row to the CSV file
+        writer.writerow(row)
+
+
 # logo and header -------------------------------------------------
 
 c30, c31, c32 = st.columns([2.5, 1, 3])
@@ -56,9 +84,13 @@ with c32:
 st.text("")
 st.markdown(
     f"""
-                    The speech to text recognition is done via the [Facebook's Wav2Vec2 model.](https://huggingface.co/facebook/wav2vec2-large-960h)
+                    The speech to text recognition is done via the [OpenAI's Whisper-tiny model.](https://huggingface.co/openai/whisper-tiny)
                     """
 )
+st.markdown(
+    f"""
+                    The emotion detection recognition is done via the [finetuned wav2vec2 for speech emotion recognition.](Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8)
+            """)
 st.text("")
 
 
@@ -126,7 +158,7 @@ def record_page():
                 values_view_emotion = {'label': data_emotion}
             # value_iterator_emotion = iter(values_view_emotion)
             # text_value_emotion = next(value_iterator_emotion)
-            text_value_emotion = "The detected emotion: " + values_view_emotion['label']
+            text_value_emotion = "The main detected emotion: " + values_view_emotion['label']
 
             st.success(text_value_emotion)
             chart_data = pd.DataFrame(
@@ -134,7 +166,7 @@ def record_page():
             )
 
             st.bar_chart(chart_data, x="label", y="score")
-
+            update_csv(CSV_PATH, text_value, data_emotion)
             c0, c1 = st.columns([2, 2])
 
             with c0:
@@ -166,21 +198,22 @@ def transcribe(audio_file):
 
 
 def entry_history():
+    df = pd.read_csv(CSV_PATH)
     st.text('Look at your previous diary entries')
     st.dataframe(
         df,
-        column_config={
-            "name": "App name",
-            "stars": st.column_config.NumberColumn(
-                "Github Stars",
-                help="Number of stars on GitHub",
-                format="%d ⭐",
-            ),
-            "url": st.column_config.LinkColumn("App URL"),
-            "views_history": st.column_config.LineChartColumn(
-                "Views (past 30 days)", y_min=0, y_max=5000
-            ),
-        },
+        # column_config={
+        #     "name": "Previous Entries",
+        #     "stars": st.column_config.NumberColumn(
+        #         "Github Stars",
+        #         help="Number of stars on GitHub",
+        #         format="%d ⭐",
+        #     ),
+        #     "url": st.column_config.LinkColumn("App URL"),
+        #     "views_history": st.column_config.(
+        #         "Views (past 30 days)", y_min=0, y_max=5000
+        #     ),
+        # },
         hide_index=True,
     )
 
