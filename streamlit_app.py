@@ -7,7 +7,7 @@ import random
 import csv
 from datetime import datetime
 
-
+st.set_page_config(layout="wide")
 def _max_width_():
     max_width_str = f"max-width: 2200px;"
     st.markdown(
@@ -213,7 +213,7 @@ def entry_history():
         #     "stars": st.column_config.NumberColumn(
         #         "Github Stars",
         #         help="Number of stars on GitHub",
-        #         format="%d ⭐",
+        #         format="%d ⭐",s
         #     ),
         #     "url": st.column_config.LinkColumn("App URL"),
         #     "views_history": st.column_config.(
