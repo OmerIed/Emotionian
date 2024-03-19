@@ -37,7 +37,8 @@ def update_csv(csv_path, transcription, emotion_analysis):
     current_date = datetime.now().strftime("%d/%m/%Y")
 
     # Define the CSV column names
-    columns = ['Date', 'Transcription', 'happy_score', 'sad_score', 'calm_score', 'angry_score', 'neutral_score']
+    columns = ['Date', 'Transcription', 'happy_score', 'sad_score', 'calm_score', 'angry_score', 'neutral_score',
+               'disgust_score', 'fearful_score', 'surprised_score']
 
     # Open the CSV file in append mode ('a') so we add a new row without overwriting existing data
     with open(csv_path, 'a', newline='') as csvfile:
@@ -52,6 +53,9 @@ def update_csv(csv_path, transcription, emotion_analysis):
             'calm_score': emotion_scores.get('calm', 0),
             'angry_score': emotion_scores.get('angry', 0),
             'neutral_score': emotion_scores.get('neutral', 0),
+            'disgust_score': emotion_scores.get('disgust', 0),
+            'fearful_score': emotion_scores.get('fearful', 0),
+            'surprised_score': emotion_scores.get('surprised', 0),
         }
 
         # Write the row to the CSV file
