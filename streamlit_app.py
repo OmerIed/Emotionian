@@ -199,6 +199,7 @@ def transcribe(audio_file):
 
 def entry_history():
     df = pd.read_csv(CSV_PATH)
+    df.sort_values('Date', ascending=False)
     st.text('Look at your previous diary entries')
     st.dataframe(
         df,
