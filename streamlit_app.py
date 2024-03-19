@@ -98,7 +98,8 @@ def record_page():
 
             # endregion API key
             headers = {"Authorization": f"Bearer {api_token}"}
-            API_URL = "https://api-inference.huggingface.co/models/facebook/wav2vec2-base-960h"
+            # API_URL = "https://api-inference.huggingface.co/models/facebook/wav2vec2-base-960h"
+            API_URL = "https://api-inference.huggingface.co/models/openai/whisper-tiny"
             def query(data):
                 response = requests.request("POST", API_URL, headers=headers, data=data)
                 return json.loads(response.content.decode("utf-8"))
