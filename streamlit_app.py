@@ -160,7 +160,7 @@ def transcribe(audio_file):
 
 
 def entry_history():
-    st.text_area('Look at your previous diary entries')
+    st.text('Look at your previous diary entries')
     st.dataframe(
         df,
         column_config={
