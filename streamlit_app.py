@@ -110,10 +110,13 @@ def record_page():
                 return response.json()
 
             data_emotion = query_emotion(bytes_data)
-            values_view_emotion = data_emotion[0]
+            if data_emotion:
+                values_view_emotion = data_emotion[0]
+            else:
+                values_view_emotion = {'label': data_emotion}
             # value_iterator_emotion = iter(values_view_emotion)
             # text_value_emotion = next(value_iterator_emotion)
-            text_value_emotion = values_view_emotion['label']
+            text_value_emotion = "The detected emotion: " + values_view_emotion['label']
 
             st.success(text_value_emotion)
 
@@ -134,7 +137,7 @@ def record_page():
 
         else:
             st.warning(
-                "🚨 The file you uploaded is more than 2MB! Please switch to full mode ↖️ and add your HuggingFace API key."
+                "🚨 The file you uploaded is more than 2MB!"
             )
             st.stop()
 
