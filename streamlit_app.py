@@ -61,11 +61,11 @@ def record_page():
 
         with st.form(key="my_form"):
 
-            audio_file = st.file_uploader("", type=[".wav"])
+            audio_file = st.file_uploader("Upload your entry for today. Up to 2MB", type=[".wav"])
 
             st.info(
                 f"""
-                            👆 Upload a .wav file. Or try a sample: [Wav sample 01](https://github.com/CharlyWargnier/CSVHub/blob/main/Wave_files_demos/Welcome.wav?raw=true) | [Wav sample 02](https://github.com/CharlyWargnier/CSVHub/blob/main/Wave_files_demos/The_National_Park.wav?raw=true)
+                                👆 Upload a .wav file. Or try a sample: [Wav sample 01](https://github.com/CharlyWargnier/CSVHub/blob/main/Wave_files_demos/Welcome.wav?raw=true) | [Wav sample 02](https://github.com/CharlyWargnier/CSVHub/blob/main/Wave_files_demos/The_National_Park.wav?raw=true)
                             """
             )
 
