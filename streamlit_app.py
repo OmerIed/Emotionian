@@ -206,7 +206,8 @@ def entry_history():
     df = df.sort_values('Date', ascending=False)
     st.text('Look at your previous diary entries')
     st.dataframe(
-        df, use_container_width=True,
+        df, use_container_width=False,
+        width=2200,
         # column_config={
         #     "name": "Previous Entries",
         #     "stars": st.column_config.NumberColumn(
