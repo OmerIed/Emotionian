@@ -9,7 +9,7 @@ from datetime import datetime
 
 
 def _max_width_():
-    max_width_str = f"max-width: 1200px;"
+    max_width_str = f"max-width: 2200px;"
     st.markdown(
         f"""
     <style>
