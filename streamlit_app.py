@@ -28,7 +28,7 @@ _max_width_()
 # Define the path to the CSV file
 CSV_PATH = 'emotionian_dataset.csv'
 
-def insert_string_every_n_chars(s, n=50, insert_str="<br>"):
+def insert_string_every_n_chars(s, n=50, insert_str="\n"):
     return insert_str.join(s[i:i+n] for i in range(0, len(s), n))
 
 def update_csv(csv_path, transcription, emotion_analysis):
