@@ -129,6 +129,11 @@ def record_page():
             text_value_emotion = "The detected emotion: " + values_view_emotion['label']
 
             st.success(text_value_emotion)
+            chart_data = pd.DataFrame(
+                data_emotion
+            )
+
+            st.bar_chart(chart_data, x="label", y="score")
 
             c0, c1 = st.columns([2, 2])
 
