@@ -34,7 +34,7 @@ def update_csv(csv_path, transcription, emotion_analysis):
     emotion_scores = {emotion['label']: emotion['score'] for emotion in emotion_analysis}
 
     # Get the current date in the desired format
-    current_date = datetime.now().strftime("%Y-%m-%d")
+    current_date = datetime.now().strftime("%Y/%m/%d")
 
     # Define the CSV column names
     columns = ['Date', 'Transcription', 'happy_score', 'sad_score', 'calm_score', 'angry_score', 'neutral_score']
