@@ -89,7 +89,7 @@ st.markdown(
 )
 st.markdown(
     f"""
-                    The emotion detection recognition is done via the [finetuned wav2vec2 for speech emotion recognition.](Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8)
+                    The emotion detection recognition is done via the [finetuned wav2vec2 for speech emotion recognition.](https://huggingface.co/Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8)
             """)
 st.text("")
 
@@ -202,7 +202,7 @@ def entry_history():
     df = df.sort_values('Date', ascending=False)
     st.text('Look at your previous diary entries')
     st.dataframe(
-        df,
+        df, use_container_width=True,
         # column_config={
         #     "name": "Previous Entries",
         #     "stars": st.column_config.NumberColumn(
