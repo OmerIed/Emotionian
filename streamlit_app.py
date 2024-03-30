@@ -93,18 +93,6 @@ with c32:
         "Made by Y. Sabag and O. Iedovnik - Team Emotionian"
     )
 
-st.text("")
-st.markdown(
-    f"""
-                    The speech to text recognition is done via the [OpenAI's Whisper-tiny model.](https://huggingface.co/openai/whisper-tiny)
-                    """
-)
-st.markdown(
-    f"""
-                    The emotion detection recognition is done via the [finetuned wav2vec2 for speech emotion recognition.](https://huggingface.co/Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8)
-            """)
-st.text("")
-
 
 def record_page():
     """ This is the main page of the app
@@ -314,7 +302,17 @@ def main():
         page = st.radio("Select your mode", tuple(pages.keys()))
 
     pages[page]()
-
+    st.text("")
+    st.markdown(
+        f"""
+                        The speech to text recognition is done via the [OpenAI's Whisper-tiny model.](https://huggingface.co/openai/whisper-tiny)
+                        """
+    )
+    st.markdown(
+        f"""
+                        The emotion detection recognition is done via the [finetuned wav2vec2 for speech emotion recognition.](https://huggingface.co/Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8)
+                """)
+    st.text("")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
