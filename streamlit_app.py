@@ -233,12 +233,15 @@ def gemini_analysis():
     df = pd.read_csv(CSV_PATH)
     df = df.sort_values('Date', ascending=False)
     last_7_entries = df['Transcription'].iloc[:7].tolist()
-    initial_prompt = """This is the 7 last diary entries from a person.
-                        The latest entry is first. Try to give insights about the persons mood and
-                        feelings according to this recent information. Treat the person as if you're writing to them
-                        as an psychology expert. You must write in HTML format, so that it will look nice on my interface.
-                        be concise and short.
-                        The entries:\n"""
+    initial_prompt = """You are a psychology expert.
+                        Your are given the 7 last diary entries from a person.
+                        The latest entry is first.
+                        These are your tasks:
+                        1. Give insights about the persons mood and feelings according to this recent information. 
+                        2. Suggest recommendations for the person.
+                        3. You must write in HTML format, so that it will look nice on my interface.
+                        4. be concise and short. 
+                        These are the entries:\n"""
     entries_str = '\n'.join(last_7_entries)
     prompt = initial_prompt + entries_str
     response = model.generate_content(prompt)
