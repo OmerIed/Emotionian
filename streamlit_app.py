@@ -208,7 +208,7 @@ def record_page():
 
 def entry_history():
     df = pd.read_csv(CSV_PATH)
-    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = pd.to_datetime(df['Date']).dt.to_period(freq="D")
     df = df.sort_values('Date', ascending=False)
     st.markdown('''<h1>Look at your previous diary entries</h1>''', unsafe_allow_html=True)
     st.dataframe(
@@ -232,7 +232,7 @@ def entry_history():
 
 def gemini_analysis():
     df = pd.read_csv(CSV_PATH)
-    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = pd.to_datetime(df['Date']).dt.to_period(freq="D")
     df = df.sort_values('Date', ascending=False)
     last_7_entries = df['Transcription'].iloc[:7].tolist()
     initial_prompt = """You are a psychology expert.
