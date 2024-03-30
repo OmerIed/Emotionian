@@ -236,7 +236,7 @@ def gemini_analysis():
     initial_prompt = """This is the 7 last diary entries from a person.
                         The latest entry is first. Try to give insights about the persons mood and
                         feelings according to this recent information. Treat the person as if you're writing to them
-                        as an psychology expert. Write in html format, so that it will look nice on my interface.
+                        as an psychology expert. You must write in HTML format, so that it will look nice on my interface.
                         be concise and short.
                         The entries:\n"""
     entries_str = '\n'.join(last_7_entries)
