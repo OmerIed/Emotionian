@@ -205,10 +205,6 @@ def record_page():
         st.stop()
 
 
-def transcribe(audio_file):
-    pass
-
-
 def entry_history():
     df = pd.read_csv(CSV_PATH)
     df = df.sort_values('Date', ascending=False)
@@ -235,7 +231,7 @@ def entry_history():
 def gemini_analysis():
     df = pd.read_csv(CSV_PATH)
     df = df.sort_values('Date', ascending=False)
-    last_7_entries = df['transcription'].iloc[:7].tolist()
+    last_7_entries = df['Transcription'].iloc[:7].tolist()
     initial_prompt = """This is the 7 last diary entries from a person.
                         The latest entry is first. Try to give insights about the persons mood and
                         feelings according to this recent information.
