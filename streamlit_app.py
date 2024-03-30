@@ -209,7 +209,7 @@ def record_page():
 def entry_history():
     df = pd.read_csv(CSV_PATH)
     df = df.sort_values('Date', ascending=False)
-    st.text('Look at your previous diary entries')
+    st.markdown('''<h1>Look at your previous diary entries</h1>''', unsafe_allow_html=True)
     st.dataframe(
         df, use_container_width=False,
         width=2200,
@@ -286,8 +286,7 @@ def analysis_of_emotion():
     fig.update_layout(height=600, width=1000, title_text="Average emotion Scores by day of the week", template='plotly_white')
     st.plotly_chart(fig, use_container_width=True)
     gemini_insight = gemini_analysis()
-    st.markdown('''<h1>These are the insights Google's Gemini has about you:</h1>''', unsafe_allow_html=True)
-    st.markdown(f'''{gemini_insight}''', unsafe_allow_html=True)
+    st.markdown(f'''<h1>These are the insights Google's Gemini has about you:</h1>\n{gemini_insight}''', unsafe_allow_html=True)
 
 
 def main():
