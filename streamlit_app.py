@@ -239,7 +239,7 @@ def gemini_analysis():
                         These are your tasks:
                         1. Give insights about the persons mood and feelings according to this recent information. 
                         2. Suggest recommendations for the person.
-                        3. You must write in HTML format, so that it will look nice on my interface.
+                        3. You must write in HTML format, (no need for writing html tag) so that it will look nice on my interface.
                         4. be concise and short. 
                         These are the entries:\n"""
     entries_str = '\n'.join(last_7_entries)
