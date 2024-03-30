@@ -282,12 +282,25 @@ def analysis_of_emotion():
     gemini_insight = gemini_analysis()
     st.markdown(f'''<h1>These are the insights Google's Gemini has about you:</h1>\n{gemini_insight}''', unsafe_allow_html=True)
 
+def about_page():
+    st.markdown(''' <h1>About Us</h1>
+                The Emotionian team presents: <b>Emotionian</b>, a diary that automatically transcribes your entries,
+                gives analysis for your emotions & thoughts using AI technologies. <br>
+                Our system has 3 main pages:<br>
+                <b>Record Your Entry</b> - The main page for the app where you can record a new entry <br>
+                <b>Your Thoughts</b> - Get the information about all of your past entries <br>
+                <b>Your Mood</b> - Get analysis for your mood, and an AI generated feedback for your well-being. <br>
+                <br> <br>
+                Our system is not a replacement for professional help. If needed we encourage you to seek professional help,
+                and use our system as a way for self-monitoring your thoughts & mood.s
+                ''', unsafe_allow_html=True)
 
 def main():
     pages = {
         "Record Your Entry": record_page,
         "Your Thoughts": entry_history,
-        "Your Mood": analysis_of_emotion
+        "Your Mood": analysis_of_emotion,
+        'About us': about_page
     }
 
     if "page" not in st.session_state:
