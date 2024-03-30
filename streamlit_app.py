@@ -234,8 +234,8 @@ def gemini_analysis():
     last_7_entries = df['Transcription'].iloc[:7].tolist()
     initial_prompt = """This is the 7 last diary entries from a person.
                         The latest entry is first. Try to give insights about the persons mood and
-                        feelings according to this recent information. Treat the person as you, as if you're writing to them
-                        as an expert. Write in html format, so that it will look nice on my interface.
+                        feelings according to this recent information. Treat the person as if you're writing to them
+                        as an psychology expert. Write in html format, so that it will look nice on my interface.
                         The entries:\n"""
     entries_str = '\n'.join(last_7_entries)
     prompt = initial_prompt + entries_str
@@ -285,7 +285,7 @@ def analysis_of_emotion():
     st.plotly_chart(fig, use_container_width=True)
     gemini_insight = gemini_analysis()
     st.text("These are the insights Google's Gemini has about you:")
-    st.markdown(gemini_insight)
+    st.markdown(f'''{gemini_insight}''', unsafe_allow_html=True)
 
 
 def main():
