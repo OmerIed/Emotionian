@@ -208,6 +208,7 @@ def record_page():
 
 def entry_history():
     df = pd.read_csv(CSV_PATH)
+    df['Date'] = pd.to_datetime(df['Date'])
     df = df.sort_values('Date', ascending=False)
     st.markdown('''<h1>Look at your previous diary entries</h1>''', unsafe_allow_html=True)
     st.dataframe(
@@ -231,6 +232,7 @@ def entry_history():
 
 def gemini_analysis():
     df = pd.read_csv(CSV_PATH)
+    df['Date'] = pd.to_datetime(df['Date'])
     df = df.sort_values('Date', ascending=False)
     last_7_entries = df['Transcription'].iloc[:7].tolist()
     initial_prompt = """You are a psychology expert.
@@ -238,7 +240,7 @@ def gemini_analysis():
                         The latest entry is first.
                         These are your tasks:
                         1. Give insights about the persons mood and feelings according to this recent information. 
-                        2. Suggest recommendations for the person.
+                        2. Suggest recommendations for the person. Write for them as 'you' instead of 'this person'.
                         3. You must write in HTML format, (no need for writing html tag) so that it will look nice on my interface.
                         4. be concise and short. 
                         These are the entries:\n"""
