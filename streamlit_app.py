@@ -210,7 +210,7 @@ def entry_history():
     df = pd.read_csv(CSV_PATH)
     df['Date'] = pd.to_datetime(df['Date']).dt.to_period(freq="D")
     df = df.sort_values('Date', ascending=False)
-    st.markdown('''<h1>Look at your previous diary entries</h1>''', unsafe_allow_html=True)
+    st.markdown('''<h1>Your Thoughts</h1>''', unsafe_allow_html=True)
     st.dataframe(
         df, use_container_width=False,
         width=2200,
@@ -264,6 +264,7 @@ def gemini_analysis():
 
 
 def analysis_of_emotion():
+    st.markdown('''<h1>Your Mood</h1>''', unsafe_allow_html=True)
     df = pd.read_csv(CSV_PATH)
     df['Date'] = pd.to_datetime(df['Date'])
     df['DayOfWeek'] = df['Date'].dt.day_name()
