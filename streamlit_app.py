@@ -31,7 +31,7 @@ _max_width_()
 
 # Define the path to the CSV file
 CSV_PATH = 'emotionian_dataset.csv'
-genai.configure(api_key=st.secrets['google_api'])
+genai.configure(api_key=st.secrets['google_token'])
 model = genai.GenerativeModel('gemini-pro')
 
 # def insert_string_every_n_chars(s, n=50, insert_str="\n"):
