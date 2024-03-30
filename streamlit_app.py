@@ -109,6 +109,7 @@ st.text("")
 def record_page():
     """ This is the main page of the app
     Where the user can record a new entry."""
+    st.markdown('''<h1>What's on your mind?</h1>''', unsafe_allow_html=True)
     c1, c2, c3 = st.columns([1, 4, 1])
     with c2:
 
@@ -236,6 +237,7 @@ def gemini_analysis():
                         The latest entry is first. Try to give insights about the persons mood and
                         feelings according to this recent information. Treat the person as if you're writing to them
                         as an psychology expert. Write in html format, so that it will look nice on my interface.
+                        be concise and short.
                         The entries:\n"""
     entries_str = '\n'.join(last_7_entries)
     prompt = initial_prompt + entries_str
@@ -284,15 +286,15 @@ def analysis_of_emotion():
     fig.update_layout(height=600, width=1000, title_text="Average emotion Scores by day of the week", template='plotly_white')
     st.plotly_chart(fig, use_container_width=True)
     gemini_insight = gemini_analysis()
-    st.text("These are the insights Google's Gemini has about you:")
+    st.markdown('''<h1>These are the insights Google's Gemini has about you:</h1>''')
     st.markdown(f'''{gemini_insight}''', unsafe_allow_html=True)
 
 
 def main():
     pages = {
-        "Record your entry": record_page,
-        "Look at your previous entries": entry_history,
-        "Analysis of your emotions": analysis_of_emotion
+        "Record Your Entry": record_page,
+        "Your Thoughts": entry_history,
+        "Your Mood": analysis_of_emotion
     }
 
     if "page" not in st.session_state:
