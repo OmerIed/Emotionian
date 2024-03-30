@@ -308,12 +308,12 @@ def main():
     st.text("")
     st.markdown(
         f"""
-                        <h5>The speech to text recognition is done via the [OpenAI's Whisper-tiny model.](https://huggingface.co/openai/whisper-tiny)</h5>
+        The speech to text recognition is done via the [OpenAI's Whisper-tiny model.](https://huggingface.co/openai/whisper-tiny)
                         """
     )
     st.markdown(
         f"""
-                        <h5>The emotion detection recognition is done via the [finetuned wav2vec2 for speech emotion recognition.](https://huggingface.co/Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8)</h5>
+        The emotion detection recognition is done via the [finetuned wav2vec2 for speech emotion recognition.](https://huggingface.co/Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8)
                 """)
     st.text("")
 
