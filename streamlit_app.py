@@ -8,6 +8,7 @@ import csv
 from datetime import datetime
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import google.generativeai as genai
 
 
 st.set_page_config(layout="wide")
@@ -30,6 +31,8 @@ _max_width_()
 
 # Define the path to the CSV file
 CSV_PATH = 'emotionian_dataset.csv'
+genai.configure(api_key=st.secrets['google_api'])
+model = genai.GenerativeModel('gemini-pro')
 
 # def insert_string_every_n_chars(s, n=50, insert_str="\n"):
 #     return insert_str.join(s[i:i+n] for i in range(0, len(s), n))
@@ -229,8 +232,31 @@ def entry_history():
     )
 
 
-def emotion_recognition():
-    pass
+def gemini_analysis():
+    df = pd.read_csv(CSV_PATH)
+    df = df.sort_values('Date', ascending=False)
+    last_7_entries = df['transcription'].iloc[:7].tolist()
+    initial_prompt = """This is the 7 last diary entries from a person.
+                        The latest entry is first. Try to give insights about the persons mood and
+                        feelings according to this recent information.
+                        The entries:\n"""
+    entries_str = '\n'.join(last_7_entries)
+    prompt = initial_prompt + entries_str
+    response = model.generate_content(prompt)
+    # for candidate in response.candidates:
+    #     response_text.append([part.text for part in candidate.content.parts])
+    try:
+        # Assuming response.text is the correct way to access the generated text
+        response_text = response.text
+        return response_text
+    except AttributeError:
+        # Handle the case where 'text' attribute is not present in the response
+        print("Error: 'text' attribute not found in the response object")
+        return "An error occured."
+    except Exception as e:
+        # Handle any other exceptions that may occur
+        print(f"An error occurred: {e}")
+        return "An error occured."
 
 
 def analysis_of_emotion():
@@ -258,8 +284,11 @@ def analysis_of_emotion():
 
         # You could add individual insights or annotations here if necessary
 
-    fig.update_layout(height=600, width=1000, title_text="Emotion Scores by Day of the Week", template='plotly_white')
+    fig.update_layout(height=600, width=1000, title_text="Average emotion Scores by day of the week", template='plotly_white')
     st.plotly_chart(fig, use_container_width=True)
+    gemini_insight = gemini_analysis()
+    st.text('This is an insight about your latest diary entries using AI:')
+    st.text(gemini_insight)
 
 
 def main():
