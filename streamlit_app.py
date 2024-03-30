@@ -286,7 +286,7 @@ def analysis_of_emotion():
     fig.update_layout(height=600, width=1000, title_text="Average emotion Scores by day of the week", template='plotly_white')
     st.plotly_chart(fig, use_container_width=True)
     gemini_insight = gemini_analysis()
-    st.markdown('''<h1>These are the insights Google's Gemini has about you:</h1>''')
+    st.markdown('''<h1>These are the insights Google's Gemini has about you:</h1>''', unsafe_allow_html=True)
     st.markdown(f'''{gemini_insight}''', unsafe_allow_html=True)
 
 
