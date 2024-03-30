@@ -6,6 +6,9 @@ import os
 import random
 import csv
 from datetime import datetime
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
 
 st.set_page_config(layout="wide")
 def _max_width_():
@@ -231,17 +234,39 @@ def emotion_recognition():
 
 
 def analysis_of_emotion():
-    pass
+    df = pd.read_csv(CSV_PATH)
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['DayOfWeek'] = df['Date'].dt.day_name()
+    emotion_scores_by_day = df.groupby('DayOfWeek')[['happy_score', 'sad_score', 'calm_score', 'angry_score', 'neutral_score', 'disgust_score', 'fearful_score', 'surprised_score']].mean()
+    days_order = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    emotion_scores_by_day = emotion_scores_by_day.reindex(days_order)
 
+    # Define subplot layout
+    num_emotions = len(emotion_scores_by_day.columns)
+    rows = int(num_emotions ** 0.5)
+    cols = -(-num_emotions // rows)  # Ceiling division to ensure enough subplots
 
+    fig = make_subplots(rows=rows, cols=cols, subplot_titles=emotion_scores_by_day.columns)
 
+    for i, emotion in enumerate(emotion_scores_by_day.columns, start=1):
+        row = (i-1) // cols + 1
+        col = (i-1) % cols + 1
+        emotion_name = emotion.split("_")[0].capitalize()
+
+        # Add trace to subplot
+        fig.add_trace(go.Scatter(x=days_order, y=emotion_scores_by_day[emotion], name=emotion_name, mode='lines+markers'), row=row, col=col)
+
+        # You could add individual insights or annotations here if necessary
+
+    fig.update_layout(height=600, width=1000, title_text="Emotion Scores by Day of the Week", template='plotly_white')
+    st.plotly_chart(fig, use_container_width=True)
 
 
 def main():
     pages = {
         "Record your entry": record_page,
         "Look at your previous entries": entry_history,
-        # "Analysis of your emotions": analysis_of_emotion
+        "Analysis of your emotions": analysis_of_emotion
     }
 
     if "page" not in st.session_state:
