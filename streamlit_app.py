@@ -152,11 +152,14 @@ def record_page():
                 response = requests.post(API_URL_EMOTION, headers=headers, data=bytes_data)
                 return response.json()
 
-            data_emotion = query_emotion(bytes_data)
-            if data_emotion:
-                values_view_emotion = data_emotion[0]
-            else:
-                values_view_emotion = {'label': data_emotion}
+            data_emotion = None
+            while not data_emotion:
+                try:
+                    data_emotion = query_emotion(bytes_data)
+                    values_view_emotion = data_emotion[0]
+                except KeyError:
+                    # If a KeyError occurs, the loop will continue and retry the request
+                    print("KeyError occurred, retrying...")
             # value_iterator_emotion = iter(values_view_emotion)
             # text_value_emotion = next(value_iterator_emotion)
             text_value_emotion = "The main detected emotion: " + values_view_emotion['label']
