@@ -142,9 +142,9 @@ def record_page():
             values_view = data.values()
             value_iterator = iter(values_view)
             text_value = next(value_iterator)
-            text_value = text_value.lower()
-
-            st.success(text_value)
+            # text_value = text_value.lower()
+            st.text('The transcription is:')
+            st.text(text_value)
 
             API_URL_EMOTION = "https://api-inference.huggingface.co/models/Wiam/wav2vec2-lg-xlsr-en-speech-emotion-recognition-finetuned-ravdess-v8"
 
