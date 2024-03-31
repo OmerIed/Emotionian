@@ -161,8 +161,6 @@ def record_page():
                     # If a KeyError occurs, the loop will continue and retry the request
                     print("KeyError occurred, retrying...")
                     data_emotion = None
-            # value_iterator_emotion = iter(values_view_emotion)
-            # text_value_emotion = next(value_iterator_emotion)
             text_value_emotion = "The main detected emotion: " + values_view_emotion['label']
 
             st.success(text_value_emotion)
