@@ -158,7 +158,7 @@ def record_page():
                     data_emotion = query_emotion(bytes_data)
                     values_view_emotion = data_emotion[0]
                 except KeyError:
-                    # If a KeyError occurs, the loop will continue and retry the request
+                    # If a KeyError occurs the loop will continue and retry the request
                     print("KeyError occurred, retrying...")
                     data_emotion = None
             text_value_emotion = "The main detected emotion: " + values_view_emotion['label']
